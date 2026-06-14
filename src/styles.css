@@ -1327,3 +1327,583 @@ h3 {
 main {
   padding-bottom: 7.5rem;
 }
+/* =========================================================
+   Secciones colapsables mobile
+   ========================================================= */
+
+.collapsible-shell {
+  position: relative;
+}
+
+.collapsible-shell .panel-heading {
+  padding-right: 3rem;
+}
+
+.section-collapse-button {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 5;
+  display: inline-grid;
+  width: 2.55rem;
+  height: 2.55rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.section-collapse-button:active {
+  transform: scale(0.96);
+}
+
+.section-collapse-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+.collapsed-section {
+  padding-block: 0.85rem;
+}
+
+.current-weather-collapsed {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+  padding-right: 3rem;
+  font-weight: 850;
+}
+
+.current-weather-collapsed strong {
+  text-transform: capitalize;
+}
+
+.current-weather-collapsed span {
+  color: var(--muted);
+}
+
+.current-weather-collapsed span:last-child {
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 950;
+}
+
+.collapsed-weather-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 5.2rem;
+  padding: 0.85rem 3.2rem 0.85rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+}
+
+.collapsed-weather-summary.status-good {
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+
+.collapsed-weather-summary.status-caution {
+  border-color: var(--caution);
+  background: var(--caution-bg);
+}
+
+.collapsed-weather-summary.status-bad {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+}
+
+.collapsed-summary-icon {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+  font-size: 1.35rem;
+}
+
+.collapsed-weather-summary strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.collapsed-weather-summary small {
+  display: block;
+  color: var(--muted);
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.category-detail-shell {
+  margin-top: 0.75rem;
+}
+
+.collapsed-category-detail {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 5.2rem;
+  padding: 0.85rem 3.2rem 0.85rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+}
+
+.collapsed-category-detail.status-good {
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+
+.collapsed-category-detail.status-caution {
+  border-color: var(--caution);
+  background: var(--caution-bg);
+}
+
+.collapsed-category-detail.status-bad {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+}
+
+.collapsed-category-icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+  font-size: 1.5rem;
+}
+
+.collapsed-category-detail strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.collapsed-category-detail span:not(.collapsed-category-icon) {
+  color: var(--muted);
+  font-weight: 850;
+}
+
+/* Ajustes para evitar espacio vacío innecesario */
+
+.app-shell {
+  min-height: 100svh;
+}
+
+.app-main,
+.main-content {
+  min-height: 0;
+  padding-bottom: max(6.25rem, calc(5rem + env(safe-area-inset-bottom)));
+}
+
+.panel {
+  height: auto;
+  min-height: 0;
+}
+
+.hero-panel,
+.weather-metrics-panel,
+.best-window-panel,
+.forecast-panel {
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-collapse-button {
+    transition: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .collapsed-weather-summary,
+  .collapsed-category-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .collapsed-summary-icon,
+  .collapsed-category-icon {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+}
+/* =========================================================
+   Fix layout footer + chevron colapsable
+   ========================================================= */
+
+:root {
+  --footer-height: 5.25rem;
+}
+
+/* El body puede mantener altura mínima, pero mejor con svh en mobile */
+body {
+  min-height: 100svh;
+}
+
+/* El espacio para el footer NO debe reservarse en el shell */
+.app-shell {
+  min-height: 100svh;
+  padding-bottom: 0 !important;
+}
+
+/* El espacio para el footer queda solo en el contenido principal */
+.app-main,
+.main-content,
+main {
+  min-height: 0;
+  padding-bottom: calc(var(--footer-height) + env(safe-area-inset-bottom) + 0.75rem) !important;
+}
+
+/* Ningún panel debería forzar altura artificial */
+.panel,
+.hero-panel,
+.weather-metrics-panel,
+.best-window-panel,
+.forecast-panel {
+  height: auto;
+  min-height: 0;
+}
+
+/* Botón de colapsar/expandir más limpio */
+.section-collapse-button {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 5;
+  display: inline-grid;
+  width: 2.55rem;
+  height: 2.55rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.section-collapse-button:active {
+  transform: scale(0.96);
+}
+
+.section-collapse-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+/* Chevron dibujado con CSS */
+.section-chevron {
+  display: block;
+  width: 0.58rem;
+  height: 0.58rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transition: transform 160ms ease;
+}
+
+/* Cerrado: flecha hacia abajo */
+.section-chevron.is-collapsed {
+  transform: translateY(-0.12rem) rotate(45deg);
+}
+
+/* Abierto: flecha hacia arriba */
+.section-chevron.is-expanded {
+  transform: translateY(0.12rem) rotate(225deg);
+}
+
+/* Ajuste del footer para que no empuje visualmente tanto */
+.ad-footer {
+  padding: 0.45rem 1rem calc(0.45rem + env(safe-area-inset-bottom));
+}
+
+.ad-banner {
+  min-height: 3.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-chevron,
+  .section-collapse-button {
+    transition: none;
+  }
+}
+/* =========================================================
+   Botón global Modo compacto
+   ========================================================= */
+
+.compact-mode-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: -0.2rem 0 0.35rem;
+}
+
+.compact-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.55rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+  color: var(--text);
+  font-weight: 900;
+  font-size: 0.88rem;
+}
+
+.compact-mode-toggle span {
+  display: inline-grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  font-size: 0.95rem;
+}
+
+.compact-mode-toggle.is-compact {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface-strong));
+}
+
+.compact-mode-toggle:active {
+  transform: scale(0.98);
+}
+
+.compact-mode-toggle:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 430px) {
+  .compact-mode-row {
+    justify-content: center;
+  }
+
+  .compact-mode-toggle {
+    width: 100%;
+  }
+}
+/* =========================================================
+   Resumen principal
+   ========================================================= */
+
+.main-wash-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.main-wash-summary.status-good {
+  border-color: var(--good);
+  background:
+    radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--good) 26%, transparent), transparent 14rem),
+    var(--good-bg);
+}
+
+.main-wash-summary.status-caution {
+  border-color: var(--caution);
+  background:
+    radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--caution) 24%, transparent), transparent 14rem),
+    var(--caution-bg);
+}
+
+.main-wash-summary.status-bad {
+  border-color: var(--bad);
+  background:
+    radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--bad) 22%, transparent), transparent 14rem),
+    var(--bad-bg);
+}
+
+.main-summary-icon {
+  display: grid;
+  width: 3.3rem;
+  height: 3.3rem;
+  place-items: center;
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-size: 1.55rem;
+}
+
+.main-summary-content {
+  min-width: 0;
+}
+
+.main-summary-content h2 {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.35rem, 6vw, 2rem);
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+
+.main-summary-subtitle {
+  margin: 0 0 0.35rem;
+  color: var(--text);
+  font-weight: 900;
+}
+
+.main-summary-helper {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.main-summary-pills {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.main-summary-pills span {
+  display: grid;
+  gap: 0.1rem;
+  min-height: 3.65rem;
+  align-content: center;
+  border: 1px solid var(--border);
+  border-radius: 0.95rem;
+  padding: 0.55rem;
+  background: color-mix(in srgb, var(--surface-strong) 72%, transparent);
+}
+
+.main-summary-pills strong {
+  font-size: 0.9rem;
+  font-weight: 950;
+  line-height: 1.05;
+}
+
+.main-summary-pills small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+@media (max-width: 370px) {
+  .main-wash-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .main-summary-pills {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================================
+   Animación suave de colapsar / expandir
+   ========================================================= */
+
+.collapsible-shell {
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    padding 220ms ease;
+}
+
+.collapsed-section {
+  animation: collapsed-section-in 220ms ease both;
+}
+
+.collapsible-shell:not(.collapsed-section) {
+  animation: expanded-section-in 220ms ease both;
+}
+
+.current-weather-collapsed,
+.collapsed-weather-summary,
+.collapsed-category-detail,
+.hero-current-row,
+.hero-actions,
+.metrics-grid,
+.metric-detail-panel,
+.category-detail-shell {
+  animation: section-content-in 220ms ease both;
+}
+
+.section-collapse-button {
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.section-collapse-button:hover {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+}
+
+.section-chevron {
+  transition: transform 220ms ease;
+}
+  
+@keyframes collapsed-section-in {
+  from {
+    opacity: 0.82;
+    transform: translateY(-0.18rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expanded-section-in {
+  from {
+    opacity: 0.9;
+    transform: translateY(0.18rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsible-shell,
+  .collapsed-section,
+  .collapsible-shell:not(.collapsed-section),
+  .current-weather-collapsed,
+  .collapsed-weather-summary,
+  .collapsed-category-detail,
+  .hero-current-row,
+  .hero-actions,
+  .metrics-grid,
+  .metric-detail-panel,
+  .category-detail-shell,
+  .section-collapse-button,
+  .section-chevron {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

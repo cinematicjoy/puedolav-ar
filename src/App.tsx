@@ -20,6 +20,9 @@ import { calculateAllRecommendations, evaluateWeatherVariables } from "./utils/s
 import { getDailyPoints, getNextHourlyPoints } from "./utils/weatherData";
 import { getWeatherTheme, isNightTime } from "./utils/weatherCodes";
 import { calculateBestWashWindow } from "./utils/washWindow";
+import { CompactModeToggle } from "./components/CompactModeToggle";
+import { useCollapsedSections } from "./hooks/useCollapsedSections";
+import { MainWashSummary } from "./components/MainWashSummary";
 
 function App() {
   const { mode, resolvedMode, setMode } = useThemeMode();
@@ -31,6 +34,12 @@ function App() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [searchResults, setSearchResults] = useState<LocationOption[]>([]);
+  const {
+  collapsedSections,
+  isCompactMode,
+  setSectionCollapsed,
+  toggleCompactMode
+} = useCollapsedSections();
 
   useEffect(() => {
     if (!location && !autoLocationAttempted) {
@@ -114,9 +123,45 @@ function App() {
 
         {weather.data && recommendations && bestWindow ? (
           <>
-            <LocationInfo data={weather.data} onRefresh={weather.refresh} onChangeLocation={handleChangeLocation} loading={weather.loading} />
-            <WeatherVariables variables={variables} />
-            <WashItemGrid recommendations={recommendations} />
+
+            <MainWashSummary
+              recommendations={recommendations}
+              variables={variables}
+              bestWindow={bestWindow}
+            />
+            
+            <CompactModeToggle
+              compact={isCompactMode}
+              onToggle={toggleCompactMode}
+            />
+
+            <LocationInfo
+              data={weather.data}
+              onRefresh={weather.refresh}
+              onChangeLocation={handleChangeLocation}
+              loading={weather.loading}
+              collapsed={collapsedSections.currentWeather}
+              onToggleCollapsed={() =>
+                setSectionCollapsed("currentWeather", !collapsedSections.currentWeather)
+              }
+            />
+
+            <WeatherVariables
+              variables={variables}
+              collapsed={collapsedSections.trafficLight}
+              onToggleCollapsed={() =>
+                setSectionCollapsed("trafficLight", !collapsedSections.trafficLight)
+              }
+            />
+
+            <WashItemGrid
+              recommendations={recommendations}
+              detailCollapsed={collapsedSections.categoryDetail}
+              onToggleDetailCollapsed={() =>
+                setSectionCollapsed("categoryDetail", !collapsedSections.categoryDetail)
+              }
+            />
+
             <BestWindowPanel window={bestWindow} />
             <ForecastSection hours={nextHours} days={nextDays} />
           </>
