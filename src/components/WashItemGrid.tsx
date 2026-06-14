@@ -22,7 +22,7 @@ export function WashItemGrid({ recommendations }: WashItemGridProps) {
       <div className="panel-heading compact-heading">
         <p className="eyebrow">Categorías</p>
         <h2>¿Qué querés lavar?</h2>
-        <p>Deslizá o tocá una categoría para ver la recomendación.</p>
+        <p>Seleccioná una categoría para ver recomendaciones.</p>
       </div>
 
       <CategoryCarousel

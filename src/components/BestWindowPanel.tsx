@@ -28,7 +28,7 @@ export function BestWindowPanel({ window }: BestWindowPanelProps) {
               : "Sin ventana clara"}
           </strong>
 
-          <p>{window.message}</p>
+          {/* <p>{window.message}</p> */}
         </div>
 
         <div className="day-plan-metrics">

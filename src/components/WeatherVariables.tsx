@@ -16,8 +16,8 @@ export function WeatherVariables({ variables }: WeatherVariablesProps) {
     <section className="panel weather-metrics-panel">
       <div className="panel-heading compact-heading">
         <p className="eyebrow">Semáforo climático</p>
-        <h2>Variables para lavar</h2>
-        <p>Tocá una variable para ver el motivo.</p>
+{/*         <h2>Variables para lavar</h2>
+ */}        <p>Tocá una variable para ver detalles.</p>
       </div>
 
       <div className="metrics-grid">
