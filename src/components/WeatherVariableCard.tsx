@@ -2,22 +2,50 @@ import type { WeatherVariableEvaluation } from "../types/wash";
 
 interface WeatherVariableCardProps {
   variable: WeatherVariableEvaluation;
+  selected: boolean;
+  onSelect: (key: string) => void;
 }
 
-export function WeatherVariableCard({ variable }: WeatherVariableCardProps) {
+const shortNames: Record<string, string> = {
+  rain: "Lluvia",
+  humidity: "Humedad",
+  temperature: "Temp.",
+  wind: "Viento",
+  sun: "Sol / UV",
+  cloud: "Nubes",
+  dew: "Rocío",
+  air: "Aire"
+};
+
+export function WeatherVariableCard({
+  variable,
+  selected,
+  onSelect
+}: WeatherVariableCardProps) {
+  const statusLabel =
+    variable.status === "good"
+      ? "óptimo"
+      : variable.status === "caution"
+        ? "precaución"
+        : "riesgo";
+
   return (
-    <article className={`variable-card status-${variable.status}`}>
-      <div className="card-topline">
-        <h3>{variable.name}</h3>
-        <span className="status-dot" aria-label={`Estado ${variable.status}`} />
-      </div>
-      <div className="variable-value">{variable.value}</div>
-      <p><strong>Ideal:</strong> {variable.ideal}</p>
-      <div className="trend-line">
-        <span className={`trend-arrow ${variable.direction}`}>{variable.direction === "neutral" ? "→" : variable.direction === "up" ? "↑" : "↓"}</span>
-        <span>{variable.percentage > 0 ? "+" : ""}{variable.percentage}% vs ideal</span>
-      </div>
-      <p className="muted">{variable.explanation}</p>
-    </article>
+    <button
+      className={`metric-card status-${variable.status} ${selected ? "selected" : ""}`}
+      type="button"
+      onClick={() => onSelect(variable.key)}
+      aria-pressed={selected}
+      aria-label={`${variable.name}: ${variable.value}. Estado: ${statusLabel}. Tocar para ver detalle.`}
+    >
+      <span className="metric-name">
+        {shortNames[variable.key] ?? variable.name}
+      </span>
+
+      <strong>
+        {variable.value}
+      </strong>
+
+      <span className="status-dot" aria-hidden="true" />
+    </button>
   );
 }

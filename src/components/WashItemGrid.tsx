@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { washItems } from "../data/washItems";
 import type { WashItemType, WashRecommendation } from "../types/wash";
-import { WashItemCard } from "./WashItemCard";
+import { CategoryCarousel } from "./CategoryCarousel";
 import { WashItemDetail } from "./WashItemDetail";
 
 interface WashItemGridProps {
@@ -10,28 +10,33 @@ interface WashItemGridProps {
 
 export function WashItemGrid({ recommendations }: WashItemGridProps) {
   const [selectedType, setSelectedType] = useState<WashItemType>("light_clothes");
-  const selectedItem = useMemo(() => washItems.find((item) => item.type === selectedType) ?? washItems[0], [selectedType]);
+
+  const selectedItem = useMemo(() => {
+    return washItems.find((item) => item.type === selectedType) ?? washItems[0];
+  }, [selectedType]);
+
   const selectedRecommendation = recommendations[selectedItem.type];
 
   return (
     <section className="panel">
-      <div className="panel-heading">
+      <div className="panel-heading compact-heading">
         <p className="eyebrow">Categorías</p>
         <h2>¿Qué querés lavar?</h2>
-        <p>Cada caso pesa distinto la lluvia, humedad, viento, sol y polvo.</p>
+        <p>Deslizá o tocá una categoría para ver la recomendación.</p>
       </div>
-      <div className="wash-grid">
-        {washItems.map((item) => (
-          <WashItemCard
-            key={item.type}
-            item={item}
-            recommendation={recommendations[item.type]}
-            selected={item.type === selectedType}
-            onSelect={setSelectedType}
-          />
-        ))}
-      </div>
-      {selectedRecommendation ? <WashItemDetail item={selectedItem} recommendation={selectedRecommendation} /> : null}
+
+      <CategoryCarousel
+        recommendations={recommendations}
+        selectedType={selectedType}
+        onSelect={setSelectedType}
+      />
+
+      {selectedRecommendation ? (
+        <WashItemDetail
+          item={selectedItem}
+          recommendation={selectedRecommendation}
+        />
+      ) : null}
     </section>
   );
 }

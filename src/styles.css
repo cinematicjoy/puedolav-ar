@@ -794,3 +794,536 @@ h3 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
+/* Header compacto */
+
+.icon-button {
+  display: inline-grid;
+  width: 2.9rem;
+  height: 2.9rem;
+  min-width: 2.9rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 74%, transparent);
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.icon-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+.brand-icon {
+  font-size: 1.45rem;
+}
+/* Popup de información */
+
+.credits-card {
+  text-align: center;
+  padding: 1.4rem;
+}
+
+.credits-icon {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto 0.75rem;
+  place-items: center;
+  border-radius: 1.2rem;
+  background: var(--secondary);
+  font-size: 1.6rem;
+}
+
+.credits-main {
+  margin: 0 auto 0.75rem;
+  max-width: 25rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.credits-contact {
+  margin-bottom: 0.7rem;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.credits-lavados {
+  margin-bottom: 0.95rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.credits-number {
+  margin-bottom: 0.85rem;
+  text-align: right;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.credits-disclaimer {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.35;
+}
+/* Consulta actual compacta */
+
+.compact-hero {
+  padding-bottom: 0.9rem;
+}
+
+.hero-current-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.compact-hero h2 {
+  margin-bottom: 0.15rem;
+  text-transform: capitalize;
+}
+
+.hero-weather-text {
+  margin-bottom: 0;
+  font-weight: 750;
+}
+
+.weather-mini-card {
+  display: grid;
+  width: 5.2rem;
+  height: 5.2rem;
+  place-items: center;
+  border-radius: 1.5rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+.weather-temp-small {
+  font-size: 2.15rem;
+  font-weight: 950;
+  letter-spacing: -0.08em;
+}
+
+.hero-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hero-actions .primary-button,
+.hero-actions .secondary-button {
+  min-height: 2.7rem;
+  padding-inline: 0.8rem;
+}
+
+@media (max-width: 370px) {
+  .hero-actions {
+    grid-template-columns: 1fr;
+  }
+}
+/* Semáforo climático compacto */
+
+.compact-heading {
+  margin-bottom: 0.75rem;
+}
+
+.compact-heading p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.metric-card {
+  position: relative;
+  display: grid;
+  min-height: 5.2rem;
+  align-content: space-between;
+  gap: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 1.05rem;
+  padding: 0.7rem;
+  text-align: left;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-strong) 86%, transparent);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.metric-card:active {
+  transform: scale(0.98);
+}
+
+.metric-card .metric-name {
+  max-width: calc(100% - 1rem);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.metric-card strong {
+  font-size: clamp(0.95rem, 4.2vw, 1.25rem);
+  letter-spacing: -0.04em;
+}
+
+.metric-card .status-dot {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0;
+}
+
+.metric-card.selected.status-good {
+  background: var(--good-bg);
+  border-color: var(--good);
+}
+
+.metric-card.selected.status-caution {
+  background: var(--caution-bg);
+  border-color: var(--caution);
+}
+
+.metric-card.selected.status-bad {
+  background: var(--bad-bg);
+  border-color: var(--bad);
+}
+
+.metric-detail-panel {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  background: var(--surface-strong);
+}
+
+.metric-detail-panel > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.metric-detail-panel p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.metric-detail-panel > div span {
+  font-weight: 950;
+}
+
+.metric-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 370px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .metrics-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+/* Categorías en carrusel */
+
+.wash-carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(9.5rem, 42%);
+  gap: 0.75rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  padding: 0.2rem 0.15rem 0.75rem;
+  margin-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wash-carousel::-webkit-scrollbar {
+  height: 0.4rem;
+}
+
+.wash-carousel::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--muted) 38%, transparent);
+}
+
+.wash-carousel-item {
+  scroll-snap-align: start;
+}
+
+.wash-carousel .wash-card {
+  width: 100%;
+  min-height: 8.6rem;
+}
+
+@media (min-width: 640px) {
+  .wash-carousel {
+    grid-auto-columns: minmax(10.5rem, 24%);
+  }
+}
+
+@media (min-width: 980px) {
+  .wash-carousel {
+    grid-auto-columns: minmax(10.5rem, 16%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wash-carousel {
+    scroll-behavior: auto;
+  }
+}
+/* Plan del día compacto */
+
+.day-plan-card {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.95rem;
+  background: var(--surface-strong);
+}
+
+.day-plan-main strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: clamp(1.2rem, 6vw, 1.8rem);
+  font-weight: 950;
+  letter-spacing: -0.05em;
+}
+
+.day-plan-main p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.day-plan-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.mini-metric {
+  min-height: 4.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 0.65rem;
+  background: var(--surface);
+}
+
+.mini-metric strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 950;
+}
+
+.mini-metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 750;
+  line-height: 1.1;
+}
+
+.compact-warning {
+  margin: 0.65rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+@media (max-width: 370px) {
+  .day-plan-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 640px) {
+  .day-plan-card {
+    grid-template-columns: 1.25fr 1fr;
+    align-items: stretch;
+  }
+}
+/* Pronóstico con pestañas */
+
+.forecast-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem;
+  background: var(--surface-strong);
+}
+
+.forecast-tabs button {
+  min-height: 2.55rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.forecast-tabs button.active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.forecast-tabs button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+.forecast-tab-panel {
+  min-width: 0;
+}
+
+.forecast-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 10.5rem;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  padding-bottom: 0.4rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.forecast-strip::-webkit-scrollbar {
+  height: 0.4rem;
+}
+
+.forecast-strip::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--muted) 38%, transparent);
+}
+
+.forecast-strip .hour-card,
+.forecast-strip .day-card {
+  min-height: 10.5rem;
+  scroll-snap-align: start;
+}
+
+.forecast-day-card .day-label {
+  margin-top: 0.2rem;
+}
+/* Footer publicitario corregido */
+
+.ad-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  padding: 0.55rem 1rem calc(0.55rem + env(safe-area-inset-bottom));
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--background) 94%, transparent),
+    color-mix(in srgb, var(--background) 68%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.ad-banner {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 0.08rem;
+  max-width: 48rem;
+  min-height: 4.2rem;
+  margin: 0 auto;
+  padding: 0.65rem 1rem;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--primary) 35%, transparent) 0 0.45rem, transparent 0.5rem),
+    radial-gradient(circle at 30% 50%, color-mix(in srgb, var(--muted) 40%, transparent) 0 0.45rem, transparent 0.5rem),
+    radial-gradient(circle at 70% 50%, color-mix(in srgb, var(--muted) 40%, transparent) 0 0.45rem, transparent 0.5rem),
+    linear-gradient(90deg, var(--surface-strong), color-mix(in srgb, var(--primary) 18%, var(--surface-strong)));
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
+  pointer-events: auto;
+}
+
+.ad-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.28;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 2.2rem,
+      color-mix(in srgb, var(--primary) 35%, transparent) 2.25rem,
+      transparent 2.35rem
+    );
+}
+
+.ad-banner-kicker {
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.ad-banner strong {
+  font-size: clamp(1rem, 5vw, 1.35rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.ad-banner small {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.ad-banner-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-main,
+.main-content,
+main {
+  padding-bottom: 7.5rem;
+}

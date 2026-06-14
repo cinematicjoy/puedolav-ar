@@ -22,7 +22,7 @@ import { getWeatherTheme, isNightTime } from "./utils/weatherCodes";
 import { calculateBestWashWindow } from "./utils/washWindow";
 
 function App() {
-  const { mode, setMode } = useThemeMode();
+  const { mode, resolvedMode, setMode } = useThemeMode();
   const [creditsOpen, setCreditsOpen] = useState(false);
   const [location, setLocation, removeLocation] = useLocalStorage<LocationOption | null>("lastLocation", null);
   const geolocation = useGeolocation();
@@ -88,7 +88,13 @@ function App() {
 
   return (
     <div className={`app-shell ${weatherTheme}`}>
-      <Header themeMode={mode} onThemeChange={setMode} onOpenCredits={() => setCreditsOpen(true)} />
+    <Header
+      themeMode={mode}
+      resolvedThemeMode={resolvedMode}
+      weatherCode={weather.data?.forecast.current?.weather_code}
+      onThemeChange={setMode}
+      onOpenCredits={() => setCreditsOpen(true)}
+    />
       <main className="app-main">
         {!location ? (
           <LocationPanel

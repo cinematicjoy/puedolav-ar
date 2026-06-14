@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { WeatherVariableEvaluation } from "../types/wash";
 import { WeatherVariableCard } from "./WeatherVariableCard";
 
@@ -6,16 +7,52 @@ interface WeatherVariablesProps {
 }
 
 export function WeatherVariables({ variables }: WeatherVariablesProps) {
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+
+  const selectedVariable =
+    variables.find((variable) => variable.key === selectedKey) ?? null;
+
   return (
-    <section className="panel">
-      <div className="panel-heading">
+    <section className="panel weather-metrics-panel">
+      <div className="panel-heading compact-heading">
         <p className="eyebrow">Semáforo climático</p>
-        <h2>Variables para lavar al aire libre</h2>
-        <p>Estas variables se combinan para decidir cada categoría lavable.</p>
+        <h2>Variables para lavar</h2>
+        <p>Tocá una variable para ver el motivo.</p>
       </div>
-      <div className="variables-grid">
-        {variables.map((variable) => <WeatherVariableCard key={variable.key} variable={variable} />)}
+
+      <div className="metrics-grid">
+        {variables.map((variable) => (
+          <WeatherVariableCard
+            key={variable.key}
+            variable={variable}
+            selected={variable.key === selectedKey}
+            onSelect={(key) =>
+              setSelectedKey((current) => current === key ? null : key)
+            }
+          />
+        ))}
       </div>
+
+      {selectedVariable ? (
+        <article className={`metric-detail-panel status-${selectedVariable.status}`}>
+          <div>
+            <strong>{selectedVariable.name}</strong>
+            <span>{selectedVariable.value}</span>
+          </div>
+
+          <p>
+            <strong>Ideal:</strong> {selectedVariable.ideal}
+          </p>
+
+          <p>
+            <strong>
+              {selectedVariable.percentage > 0 ? "+" : ""}
+              {selectedVariable.percentage}% vs ideal.
+            </strong>{" "}
+            {selectedVariable.explanation}
+          </p>
+        </article>
+      ) : null}
     </section>
   );
 }

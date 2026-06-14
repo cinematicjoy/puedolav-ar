@@ -1,6 +1,5 @@
 import type { WeatherData } from "../types/weather";
-import { formatDateTime, timeAgo } from "../utils/dateFormat";
-import { formatLocation, formatLocationDetails } from "../utils/locationFormat";
+import { formatHour } from "../utils/dateFormat";
 import { getWeatherDescription } from "../utils/weatherCodes";
 
 interface LocationInfoProps {
@@ -10,31 +9,86 @@ interface LocationInfoProps {
   loading?: boolean;
 }
 
-export function LocationInfo({ data, onRefresh, onChangeLocation, loading }: LocationInfoProps) {
+function formatCurrentDay(dateLike: Date, timezone?: string): string {
+  return new Intl.DateTimeFormat("es-AR", {
+    weekday: "long",
+    timeZone: timezone
+  }).format(dateLike);
+}
+
+function formatCurrentDate(dateLike: Date, timezone?: string): string {
+  return new Intl.DateTimeFormat("es-AR", {
+    day: "numeric",
+    month: "long",
+    timeZone: timezone
+  }).format(dateLike);
+}
+
+export function LocationInfo({
+  data,
+  onRefresh,
+  onChangeLocation,
+  loading
+}: LocationInfoProps) {
   const current = data.forecast.current;
   const timezone = data.forecast.timezone ?? data.location.timezone;
-  const details = formatLocationDetails(data.location);
+  const now = new Date();
 
   return (
-    <section className="panel hero-panel">
-      {data.offline ? <div className="offline-pill">Sin conexión · últimos datos guardados</div> : null}
-      {data.fromCache && !data.offline ? <div className="offline-pill">Datos guardados</div> : null}
-      <div className="hero-grid">
+    <section className="panel hero-panel compact-hero">
+      {data.offline ? (
+        <div className="offline-pill">
+          Sin conexión · últimos datos guardados
+        </div>
+      ) : null}
+
+      {data.fromCache && !data.offline ? (
+        <div className="offline-pill">
+          Datos guardados
+        </div>
+      ) : null}
+
+      <div className="hero-current-row">
         <div>
           <p className="eyebrow">Consulta actual</p>
-          <h2>Estás consultando desde {formatLocation(data.location)}</h2>
-          <p className="muted">{details.join(" · ")}</p>
-          <p className="date-line">{formatDateTime(new Date(), timezone)}</p>
+
+          <h2>{formatCurrentDay(now, timezone)}</h2>
+
+          <p className="date-line">
+            {formatCurrentDate(now, timezone)} · {formatHour(now, timezone)}
+          </p>
+
+          <p className="muted hero-weather-text">
+            {getWeatherDescription(current?.weather_code)}
+          </p>
         </div>
-        <div className="weather-summary-card">
-          <span className="weather-temp">{current?.temperature_2m !== undefined ? `${Math.round(current.temperature_2m)}°C` : "--"}</span>
-          <span>{getWeatherDescription(current?.weather_code)}</span>
-          <small>Actualizado {timeAgo(data.fetchedAt)}</small>
+
+        <div className="weather-mini-card" aria-label="Temperatura actual">
+          <span className="weather-temp-small">
+            {current?.temperature_2m !== undefined
+              ? `${Math.round(current.temperature_2m)}°`
+              : "--"}
+          </span>
         </div>
       </div>
-      <div className="action-row">
-        <button className="primary-button" type="button" onClick={onRefresh} disabled={loading}>{loading ? "Actualizando..." : "Actualizar clima"}</button>
-        <button className="secondary-button" type="button" onClick={onChangeLocation}>Cambiar ubicación</button>
+
+      <div className="action-row hero-actions">
+        <button
+          className="primary-button"
+          type="button"
+          onClick={onRefresh}
+          disabled={loading}
+        >
+          {loading ? "Actualizando..." : "Actualizar"}
+        </button>
+
+        <button
+          className="secondary-button"
+          type="button"
+          onClick={onChangeLocation}
+        >
+          Cambiar ubicación
+        </button>
       </div>
     </section>
   );
