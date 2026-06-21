@@ -1,0 +1,52 @@
+{
+  "packageId": "io.github.cinematicjoy.twa",
+  "host": "ar.puedolav.app",
+  "name": "puedolav.ar",
+  "launcherName": "Puedo Lavar",
+  "display": "standalone",
+  "themeColor": "#5FBF8F",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#EEF8F1",
+  "enableNotifications": true,
+  "startUrl": "io.github.cinematicjoy.puedolavar",
+  "iconUrl": "https://cinematicjoy.github.io/puedolav-ar/icons/icon-512.png",
+  "maskableIconUrl": "https://cinematicjoy.github.io/puedolav-ar/icons/icon-512.png",
+  "monochromeIconUrl": "https://cinematicjoy.github.io/puedolav-ar/icons/icon-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "C:\\Users\\Joshua Torres\\puedolav-ar-mvp\\puedolav-ar\\android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://cinematicjoy.github.io/puedolav-ar/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://cinematicjoy.github.io/puedolav-ar/",
+  "minSdkVersion": 21,
+  "orientation": "portrait-primary",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "displayOverride": [],
+  "appVersion": "1"
+}

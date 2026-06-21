@@ -23,6 +23,11 @@ import { calculateBestWashWindow } from "./utils/washWindow";
 import { CompactModeToggle } from "./components/CompactModeToggle";
 import { useCollapsedSections } from "./hooks/useCollapsedSections";
 import { MainWashSummary } from "./components/MainWashSummary";
+import { InstallAppButton } from "./components/InstallAppButton";
+import { LegalLinks } from "./components/LegalLinks";
+import { PrivacyPage } from "./components/PrivacyPage";
+import { SupportPage } from "./components/SupportPage";
+import { useHashRoute } from "./hooks/useHashRoute";
 
 function App() {
   const { mode, resolvedMode, setMode } = useThemeMode();
@@ -34,6 +39,7 @@ function App() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [searchResults, setSearchResults] = useState<LocationOption[]>([]);
+  const { route, navigate } = useHashRoute();
   const {
   collapsedSections,
   isCompactMode,
@@ -95,6 +101,38 @@ function App() {
   const nextHours = useMemo(() => (weather.data ? getNextHourlyPoints(weather.data, 12) : []), [weather.data]);
   const nextDays = useMemo(() => (weather.data ? getDailyPoints(weather.data).slice(0, 7) : []), [weather.data]);
 
+  if (route === "privacy") {
+    return (
+      <div className={`app-shell theme-${resolvedMode}`}>
+        <Header
+          themeMode={mode}
+          resolvedThemeMode={resolvedMode}
+          weatherCode={weather.data?.forecast.current?.weather_code}
+          onThemeChange={setMode}
+          onOpenCredits={() => setCreditsOpen(true)}
+        />
+        <PrivacyPage onBack={() => navigate("home")} />
+        <CreditsModal open={creditsOpen} onClose={() => setCreditsOpen(false)} />
+      </div>
+    );
+  }
+
+  if (route === "support") {
+    return (
+      <div className={`app-shell theme-${resolvedMode}`}>
+        <Header
+          themeMode={mode}
+          resolvedThemeMode={resolvedMode}
+          weatherCode={weather.data?.forecast.current?.weather_code}
+          onThemeChange={setMode}
+          onOpenCredits={() => setCreditsOpen(true)}
+        />
+        <SupportPage onBack={() => navigate("home")} />
+        <CreditsModal open={creditsOpen} onClose={() => setCreditsOpen(false)} />
+      </div>
+    );
+  }
+
   return (
     <div className={`app-shell ${weatherTheme}`}>
     <Header
@@ -123,6 +161,8 @@ function App() {
 
         {weather.data && recommendations && bestWindow ? (
           <>
+
+            <InstallAppButton />
 
             <MainWashSummary
               recommendations={recommendations}
@@ -164,6 +204,10 @@ function App() {
 
             <BestWindowPanel window={bestWindow} />
             <ForecastSection hours={nextHours} days={nextDays} />
+            <LegalLinks
+              onPrivacy={() => navigate("privacy")}
+              onSupport={() => navigate("support")}
+            />
           </>
         ) : null}
       </main>

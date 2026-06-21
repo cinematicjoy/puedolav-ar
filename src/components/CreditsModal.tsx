@@ -33,7 +33,7 @@ export function CreditsModal({ open, onClose }: CreditsModalProps) {
         </p>
 
         <p className="credits-contact">
-          contacto@puedolav.ar
+          puedolav.ar@gmail.com
         </p>
 
         <p className="credits-lavados">

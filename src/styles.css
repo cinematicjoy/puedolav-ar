@@ -1907,3 +1907,95 @@ main {
     transform: none !important;
   }
 }
+/* Botón instalar app */
+
+.install-app-row {
+  display: flex;
+  justify-content: center;
+}
+
+.install-app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 24%, var(--surface-strong));
+  color: var(--text);
+  font-weight: 950;
+}
+
+.install-app-button:active {
+  transform: scale(0.98);
+}
+
+.install-app-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .install-app-row {
+    justify-content: flex-end;
+  }
+
+  .install-app-button {
+    width: auto;
+    padding-inline: 1rem;
+  }
+}
+/* Páginas legales y soporte */
+
+.legal-page {
+  width: min(100%, 56rem);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.legal-panel {
+  margin-top: 1rem;
+}
+
+.legal-panel h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  line-height: 1;
+}
+
+.legal-panel h2 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.legal-panel p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.legal-note {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.legal-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.5rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.legal-links button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 850;
+  text-decoration: underline;
+}
