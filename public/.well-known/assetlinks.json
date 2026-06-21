@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "ar.puedolav.app",
+      "package_name": "io.github.cinematicjoy.twa",
       "sha256_cert_fingerprints": [
         "F0:58:36:A6:C0:FD:38:BD:9B:AC:1F:DA:71:E0:86:6D:31:84:4E:C9:E1:6D:11:17:21:34:AD:F5:C3:CA:44:82"
       ]
