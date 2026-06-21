@@ -18,7 +18,7 @@
     <color name="accent_material_light">@color/material_deep_teal_500</color>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
-    <color name="backgroundColor">#EEF8F1</color>
+    <color name="backgroundColor">#10251D</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
@@ -37,8 +37,8 @@
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="call_notification_answer_color">#1d873b</color>
     <color name="call_notification_decline_color">#d93025</color>
-    <color name="colorPrimary">#5FBF8F</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#10251D</color>
+    <color name="colorPrimaryDark">#10251D</color>
     <color name="common_google_signin_btn_text_dark_default">@android:color/white</color>
     <color name="common_google_signin_btn_text_dark_disabled">#1F000000</color>
     <color name="common_google_signin_btn_text_dark_focused">@android:color/black</color>
@@ -69,8 +69,8 @@
     <color name="material_grey_800">#ff424242</color>
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
-    <color name="navigationColor">#000000</color>
-    <color name="navigationColorDark">#000000</color>
+    <color name="navigationColor">#10251D</color>
+    <color name="navigationColorDark">#10251D</color>
     <color name="navigationDividerColor">#000000</color>
     <color name="navigationDividerColorDark">#000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
@@ -330,7 +330,7 @@
         \"relation\": [\"delegate_permission/common.handle_all_urls\"],
         \"target\": {
             \"namespace\": \"web\",
-            \"site\": \"https://ar.puedolav.app\"
+            \"site\": \"https://cinematicjoy.github.io\"
         }
     }]
     
@@ -367,9 +367,9 @@
     <string name="fallback_menu_item_share_link">Share link</string>
     <string name="fullScopeUrl" translatable="false">https://cinematicjoy.github.io/puedolav-ar/</string>
     <string name="generatorApp" translatable="false">bubblewrap-cli</string>
-    <string name="hostName" translatable="false">ar.puedolav.app</string>
-    <string name="launchUrl" translatable="false">https://ar.puedolav.appio.github.cinematicjoy.puedolavar</string>
-    <string name="launcherName" translatable="false">Puedo Lavar</string>
+    <string name="hostName" translatable="false">cinematicjoy.github.io</string>
+    <string name="launchUrl" translatable="false">https://cinematicjoy.github.io/puedolav-ar/</string>
+    <string name="launcherName" translatable="false">puedolav.ar</string>
     <string name="manage_space_no_data_toast">This app holds no browsing data.</string>
     <string name="manage_space_not_supported_toast">This app\'s data is stored in %1$s.</string>
     <string name="no_provider_toast">Please install Chrome Stable 72 or later.</string>

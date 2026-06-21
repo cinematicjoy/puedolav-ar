@@ -7,3 +7,7 @@ dist
 *.jks
 *.p12
 android.keystore
+*.apk
+*.aab
+build
+app/build

@@ -8,15 +8,15 @@
     <!-- Value from default config. -->
     <bool name="enableSiteSettingsShortcut">true</bool>
     <!-- Value from default config. -->
-    <color name="backgroundColor">#EEF8F1</color>
+    <color name="backgroundColor">#10251D</color>
     <!-- Value from default config. -->
-    <color name="colorPrimary">#5FBF8F</color>
+    <color name="colorPrimary">#10251D</color>
     <!-- Value from default config. -->
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryDark">#10251D</color>
     <!-- Value from default config. -->
-    <color name="navigationColor">#000000</color>
+    <color name="navigationColor">#10251D</color>
     <!-- Value from default config. -->
-    <color name="navigationColorDark">#000000</color>
+    <color name="navigationColorDark">#10251D</color>
     <!-- Value from default config. -->
     <color name="navigationDividerColor">#000000</color>
     <!-- Value from default config. -->
@@ -32,11 +32,11 @@
     <!-- Value from default config. -->
     <string name="generatorApp" translatable="false">bubblewrap-cli</string>
     <!-- Value from default config. -->
-    <string name="hostName" translatable="false">ar.puedolav.app</string>
+    <string name="hostName" translatable="false">cinematicjoy.github.io</string>
     <!-- Value from default config. -->
-    <string name="launchUrl" translatable="false">https://ar.puedolav.appio.github.cinematicjoy.puedolavar</string>
+    <string name="launchUrl" translatable="false">https://cinematicjoy.github.io/puedolav-ar/</string>
     <!-- Value from default config. -->
-    <string name="launcherName" translatable="false">Puedo Lavar</string>
+    <string name="launcherName" translatable="false">puedolav.ar</string>
     <!-- Value from default config. -->
     <string name="orientation" translatable="false">portrait-primary</string>
     <!-- Value from default config. -->
