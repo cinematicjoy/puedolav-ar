@@ -15,3 +15,6 @@ app/build
 .gradle/
 dev-dist
 *.tsbuildinfo
+
+dev-dist
+*.tsbuildinfo
