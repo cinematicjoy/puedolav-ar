@@ -1,9 +1,20 @@
+import type { ReactNode } from "react";
+
 interface CreditsModalProps {
   open: boolean;
   onClose: () => void;
+  onPrivacy: () => void;
+  onSupport: () => void;
+  notificationControl?: ReactNode;
 }
 
-export function CreditsModal({ open, onClose }: CreditsModalProps) {
+export function CreditsModal({
+  open,
+  onClose,
+  onPrivacy,
+  onSupport,
+  notificationControl
+}: CreditsModalProps) {
   if (!open) return null;
 
   return (
@@ -48,6 +59,36 @@ export function CreditsModal({ open, onClose }: CreditsModalProps) {
           <strong><em>Disclaimer:</em></strong> recomendación basada en pronóstico horario.
           Puede variar por microclima, sombra, balcón o patio.
         </p>
+
+        {notificationControl ? (
+          <div className="credits-notification-control">
+            {notificationControl}
+          </div>
+        ) : null}
+
+        <div className="credits-modal-links" aria-label="Enlaces legales y soporte">
+        <button
+          type="button"
+          className="credits-link-button"
+          onClick={() => {
+            onClose();
+            onPrivacy();
+          }}
+        >
+          Política de privacidad
+        </button>
+
+        <button
+          type="button"
+          className="credits-link-button"
+          onClick={() => {
+            onClose();
+            onSupport();
+          }}
+        >
+          Soporte / contacto
+        </button>
+      </div>
       </section>
     </div>
   );

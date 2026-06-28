@@ -20,7 +20,6 @@ import { calculateAllRecommendations, evaluateWeatherVariables } from "./utils/s
 import { getDailyPoints, getNextHourlyPoints } from "./utils/weatherData";
 import { getWeatherTheme, isNightTime } from "./utils/weatherCodes";
 import { calculateBestWashWindow } from "./utils/washWindow";
-import { CompactModeToggle } from "./components/CompactModeToggle";
 import { useCollapsedSections } from "./hooks/useCollapsedSections";
 import { MainWashSummary } from "./components/MainWashSummary";
 import { InstallAppButton } from "./components/InstallAppButton";
@@ -111,9 +110,24 @@ function App() {
           weatherCode={weather.data?.forecast.current?.weather_code}
           onThemeChange={setMode}
           onOpenCredits={() => setCreditsOpen(true)}
+          compactMode={isCompactMode}
+          onToggleCompactMode={toggleCompactMode}
         />
         <PrivacyPage onBack={() => navigate("home")} />
-        <CreditsModal open={creditsOpen} onClose={() => setCreditsOpen(false)} />
+        <CreditsModal
+          open={creditsOpen}
+          onClose={() => setCreditsOpen(false)}
+          onPrivacy={() => navigate("privacy")}
+          onSupport={() => navigate("support")}
+          notificationControl={
+            weather.data ? (
+              <WashPushToggle
+                data={weather.data}
+                variant="modal"
+              />
+            ) : null
+          }
+        />
       </div>
     );
   }
@@ -127,9 +141,24 @@ function App() {
           weatherCode={weather.data?.forecast.current?.weather_code}
           onThemeChange={setMode}
           onOpenCredits={() => setCreditsOpen(true)}
+          compactMode={isCompactMode}
+          onToggleCompactMode={toggleCompactMode}
         />
         <SupportPage onBack={() => navigate("home")} />
-        <CreditsModal open={creditsOpen} onClose={() => setCreditsOpen(false)} />
+        <CreditsModal
+          open={creditsOpen}
+          onClose={() => setCreditsOpen(false)}
+          onPrivacy={() => navigate("privacy")}
+          onSupport={() => navigate("support")}
+          notificationControl={
+            weather.data ? (
+              <WashPushToggle
+                data={weather.data}
+                variant="modal"
+              />
+            ) : null
+          }
+        />
       </div>
     );
   }
@@ -142,6 +171,8 @@ function App() {
       weatherCode={weather.data?.forecast.current?.weather_code}
       onThemeChange={setMode}
       onOpenCredits={() => setCreditsOpen(true)}
+      compactMode={isCompactMode}
+      onToggleCompactMode={toggleCompactMode}
     />
       <main className="app-main">
         {!location ? (
@@ -171,11 +202,10 @@ function App() {
               bestWindow={bestWindow}
             />
 
-            <WashPushToggle data={weather.data} />
-            
-            <CompactModeToggle
-              compact={isCompactMode}
-              onToggle={toggleCompactMode}
+            <WashPushToggle
+              data={weather.data}
+              variant="home"
+              hideAfterDecision
             />
 
             <LocationInfo
@@ -207,15 +237,25 @@ function App() {
 
             <BestWindowPanel window={bestWindow} />
             <ForecastSection hours={nextHours} days={nextDays} />
-            <LegalLinks
-              onPrivacy={() => navigate("privacy")}
-              onSupport={() => navigate("support")}
-            />
+            
           </>
         ) : null}
       </main>
       <AdFooter />
-      <CreditsModal open={creditsOpen} onClose={() => setCreditsOpen(false)} />
+      <CreditsModal
+        open={creditsOpen}
+        onClose={() => setCreditsOpen(false)}
+        onPrivacy={() => navigate("privacy")}
+        onSupport={() => navigate("support")}
+        notificationControl={
+          weather.data ? (
+            <WashPushToggle
+              data={weather.data}
+              variant="modal"
+            />
+          ) : null
+        }
+      />
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { supabase } from "../lib/supabase";
 
 interface WashPushToggleProps {
   data: WeatherData;
+  variant?: "home" | "modal";
+  hideAfterDecision?: boolean;
 }
 
 function urlBase64ToUint8Array(base64String: string) {
@@ -38,10 +40,19 @@ function getPushSupportError() {
   return null;
 }
 
-export function WashPushToggle({ data }: WashPushToggleProps) {
+export function WashPushToggle({
+  data,
+  variant = "home",
+  hideAfterDecision = false
+}: WashPushToggleProps) {
   const [enabled, setEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+
+  const [dismissedFromHome, setDismissedFromHome] = useState(() => {
+  if (variant !== "home") return false;
+  return localStorage.getItem("puedolav:push-home-dismissed") === "true";
+});
 
   const vapidPublicKey = import.meta.env.VITE_VAPID_PUBLIC_KEY as string | undefined;
 
@@ -66,6 +77,11 @@ export function WashPushToggle({ data }: WashPushToggleProps) {
     setLoading(true);
     setMessage(null);
 
+    if (hideAfterDecision) {
+        localStorage.setItem("puedolav:push-home-dismissed", "true");
+        setDismissedFromHome(true);
+        }
+
     try {
       const supportError = getPushSupportError();
 
@@ -86,10 +102,16 @@ export function WashPushToggle({ data }: WashPushToggleProps) {
 
       const permission = await Notification.requestPermission();
 
-      if (permission !== "granted") {
+        if (permission !== "granted") {
         setMessage("No se activaron las notificaciones porque no se otorgó el permiso.");
+
+        if (hideAfterDecision) {
+            localStorage.setItem("puedolav:push-home-dismissed", "true");
+            setDismissedFromHome(true);
+        }
+
         return;
-      }
+        }
 
       const registration = await navigator.serviceWorker.ready;
 
@@ -159,13 +181,24 @@ export function WashPushToggle({ data }: WashPushToggleProps) {
     }
   }
 
+  if (variant === "home" && dismissedFromHome) {
+    return null;
+    }
+
   return (
-    <section className="push-toggle-panel">
+    <section className={`push-toggle-panel push-toggle-panel--${variant}`}>
       <div>
-        <strong>Avisarme cuando convenga lavar</strong>
-        <p>
-          Recibí una notificación cuando el clima pase a estar favorable.
-        </p>
+        <strong>
+            {variant === "modal"
+                ? "Notificaciones de lavado"
+                : "Avisarme cuando convenga lavar"}
+            </strong>
+
+            <p>
+            {variant === "modal"
+                ? "Activá o desactivá los avisos cuando el clima pase a estar favorable."
+                : "Recibí una notificación cuando el clima pase a estar favorable."}
+            </p>
         {message ? <small>{message}</small> : null}
       </div>
 

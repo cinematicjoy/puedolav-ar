@@ -2058,3 +2058,202 @@ main {
     width: 100%;
   }
 }
+/* Notificaciones push: home y modal */
+
+.push-toggle-panel--home {
+  margin-top: 0.75rem;
+}
+
+.push-toggle-panel--modal {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 1.1rem;
+  grid-template-columns: 1fr;
+}
+
+.push-toggle-panel--modal button {
+  width: 100%;
+}
+
+.credits-notification-control {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+/* =========================================================
+   Ajustes finales Header + Modal información
+   ========================================================= */
+
+/* Header: botón compacto/completo */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button.compact-header-button,
+.compact-header-button {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  color: var(--text);
+  box-shadow: none;
+  line-height: 1;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.compact-header-button svg,
+.compact-header-button .compact-mode-icon {
+  display: block;
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: currentColor;
+}
+
+.compact-header-button .compact-mode-icon-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.compact-header-button.is-compact {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 24%, var(--surface-strong));
+}
+
+.compact-header-button:active {
+  transform: scale(0.96);
+}
+
+.compact-header-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  outline-offset: 3px;
+}
+
+/* Modal: notificaciones */
+
+.credits-notification-control {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.credits-notification-control .push-toggle-panel {
+  margin: 0;
+}
+
+.push-toggle-panel--modal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+}
+
+.push-toggle-panel--modal strong {
+  display: block;
+  text-align: center;
+  font-weight: 950;
+}
+
+.push-toggle-panel--modal p {
+  margin: 0.25rem 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.push-toggle-panel--modal small {
+  display: block;
+  margin-top: 0.45rem;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.push-toggle-panel--modal button {
+  width: 100%;
+  min-height: 2.7rem;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 28%, var(--surface-strong));
+  color: var(--text);
+  font-weight: 950;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Modal: links privacidad / soporte */
+
+.credits-modal-links {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.credits-link-button {
+  display: inline-flex;
+  width: 100%;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  color: var(--text);
+  font: inherit;
+  font-weight: 950;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.credits-link-button:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+}
+
+.credits-link-button:active {
+  transform: scale(0.98);
+}
+
+.credits-link-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 420px) {
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  button.compact-header-button,
+  .compact-header-button {
+    width: 2.55rem;
+    height: 2.55rem;
+    min-width: 2.55rem;
+    min-height: 2.55rem;
+  }
+
+  .compact-header-button svg,
+  .compact-header-button .compact-mode-icon {
+    width: 1.22rem;
+    height: 1.22rem;
+  }
+}
