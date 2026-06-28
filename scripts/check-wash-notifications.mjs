@@ -27,6 +27,7 @@ if (!VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) {
 }
 
 const baseUrl = NOTIFICATION_BASE_URL ?? "https://cinematicjoy.github.io/puedolav-ar/";
+const normalizedBaseUrl = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
 
 webpush.setVapidDetails(
   "mailto:puedolav.ar@gmail.com",
@@ -132,8 +133,8 @@ async function sendNotification(subscription, weatherResult) {
     title: "Buen momento para lavar",
     body: `Condiciones favorables: ${Math.round(weatherResult.temperature)}°C, lluvia ${Math.round(weatherResult.rainProbability)}%, humedad ${Math.round(weatherResult.humidity)}%.`,
     url: baseUrl,
-    icon: `${baseUrl}icons/notification-${iconKind}.svg`,
-    badge: `${baseUrl}icons/notification-badge.svg`
+    icon: `${baseUrl}icons/notification-${iconKind}.png`,
+    badge: `${baseUrl}icons/notification-badge.png`
     };
 
   await webpush.sendNotification(
