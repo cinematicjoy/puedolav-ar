@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: "0 * * * *"
   workflow_dispatch:
+    inputs:
+      force_test:
+        description: "Enviar notificación de prueba a suscripciones activas"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 jobs:
   check-wash-conditions:
@@ -30,3 +39,4 @@ jobs:
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
           NOTIFICATION_BASE_URL: https://cinematicjoy.github.io/puedolav-ar/
+          FORCE_SEND_TEST_PUSH: ${{ github.event.inputs.force_test || 'false' }}

@@ -6,8 +6,11 @@ const {
   SUPABASE_SERVICE_ROLE_KEY,
   VAPID_PUBLIC_KEY,
   VAPID_PRIVATE_KEY,
-  NOTIFICATION_BASE_URL
+  NOTIFICATION_BASE_URL,
+  FORCE_SEND_TEST_PUSH
 } = process.env;
+
+const forceSendTestPush = FORCE_SEND_TEST_PUSH === "true";
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
   throw new Error("Faltan SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY.");
@@ -140,10 +143,13 @@ async function main() {
       const previousStatus = subscription.last_status;
       const currentStatus = weatherResult.isGood ? "good" : "not_good";
 
-      const shouldNotify =
-        currentStatus === "good" &&
-        previousStatus !== "good" &&
-        !isRecentlyNotified(subscription.last_notified_at);
+        const shouldNotify =
+        forceSendTestPush ||
+        (
+            currentStatus === "good" &&
+            previousStatus !== "good" &&
+            !isRecentlyNotified(subscription.last_notified_at)
+        );
 
       if (shouldNotify) {
         await sendNotification(subscription, weatherResult);
@@ -169,7 +175,9 @@ async function main() {
           })
           .eq("id", subscription.id);
 
-        console.log(`Sin notificar: ${subscription.id} estado=${currentStatus}`);
+        console.log(
+        `Notificación enviada: ${subscription.id}${forceSendTestPush ? " modo=test" : ""}`
+        );
       }
     } catch (error) {
       console.error(`Error en suscripción ${subscription.id}`, error);
