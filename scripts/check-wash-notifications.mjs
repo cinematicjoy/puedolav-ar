@@ -51,6 +51,7 @@ function calculateGoodConditions(current) {
   const temperature = Number(current.temperature_2m ?? 0);
   const wind = Number(current.wind_speed_10m ?? 0);
   const cloudCover = Number(current.cloud_cover ?? 100);
+  const weatherCode = Number(current.weather_code ?? 0);
 
   const checks = {
     rain: rainProbability <= 20,
@@ -70,8 +71,34 @@ function calculateGoodConditions(current) {
     humidity,
     temperature,
     wind,
-    cloudCover
+    cloudCover,
+    weatherCode
   };
+}
+
+function getNotificationIconKind(weatherResult) {
+  const code = weatherResult.weatherCode;
+
+  if ([95, 96, 99].includes(code)) return "storm";
+
+  if (
+    [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code) ||
+    weatherResult.rainProbability >= 45
+  ) {
+    return "rain";
+  }
+
+  if (weatherResult.wind >= 30) return "wind";
+
+  if ([1, 2].includes(code) || weatherResult.cloudCover <= 45) {
+    return "sun";
+  }
+
+  if ([3, 45, 48].includes(code) || weatherResult.cloudCover > 45) {
+    return "cloud";
+  }
+
+  return "default";
 }
 
 async function getWeather(latitude, longitude, timezone) {
@@ -83,7 +110,8 @@ async function getWeather(latitude, longitude, timezone) {
       "relative_humidity_2m",
       "precipitation_probability",
       "cloud_cover",
-      "wind_speed_10m"
+      "wind_speed_10m",
+      "weather_code"
     ].join(","),
     timezone: timezone || "auto",
     forecast_days: "1"
@@ -99,13 +127,14 @@ async function getWeather(latitude, longitude, timezone) {
 }
 
 async function sendNotification(subscription, weatherResult) {
-  const payload = {
+    const iconKind = getNotificationIconKind(weatherResult);
+    const payload = {
     title: "Buen momento para lavar",
     body: `Condiciones favorables: ${Math.round(weatherResult.temperature)}°C, lluvia ${Math.round(weatherResult.rainProbability)}%, humedad ${Math.round(weatherResult.humidity)}%.`,
     url: baseUrl,
-    icon: `${baseUrl}icons/icon-192.png`,
-    badge: `${baseUrl}icons/icon-192.png`
-  };
+    icon: `${baseUrl}icons/notification-${iconKind}.svg`,
+    badge: `${baseUrl}icons/notification-badge.svg`
+    };
 
   await webpush.sendNotification(
     {

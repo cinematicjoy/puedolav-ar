@@ -3,8 +3,8 @@ self.addEventListener("push", (event) => {
     title: "Buen momento para lavar",
     body: "Las condiciones acompañan. Aprovechá mientras el clima ayuda.",
     url: "/puedolav-ar/",
-    icon: "/puedolav-ar/icons/icon-192.png",
-    badge: "/puedolav-ar/icons/icon-192.png"
+    icon: "/puedolav-ar/icons/notification-default.svg",
+    badge: "/puedolav-ar/icons/notification-badge.svg"
   };
 
   if (event.data) {
