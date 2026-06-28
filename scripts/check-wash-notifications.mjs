@@ -13,6 +13,12 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
   throw new Error("Faltan SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY.");
 }
 
+if (SUPABASE_URL.includes("/rest/v1") || SUPABASE_URL.includes("/auth/v1")) {
+  throw new Error(
+    "SUPABASE_URL debe ser la URL base del proyecto, No debe incluir /rest/v1 ni /auth/v1."
+  );
+}
+
 if (!VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) {
   throw new Error("Faltan VAPID_PUBLIC_KEY o VAPID_PRIVATE_KEY.");
 }
