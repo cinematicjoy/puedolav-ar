@@ -2257,3 +2257,167 @@ button.compact-header-button,
     height: 1.22rem;
   }
 }
+/* =========================================================
+   Ajuste final de espaciado general mobile / desktop
+   ========================================================= */
+
+.app-shell main,
+.app-main,
+.main-content,
+.home-content,
+.content-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Separación específica entre respuesta rápida y bloques colapsables */
+
+.quick-summary,
+.main-summary,
+.main-wash-summary,
+.wash-summary-card,
+.response-summary,
+.hero-summary {
+  margin-bottom: 0.35rem;
+}
+
+/* Si el resumen está seguido por una sección colapsable, darle aire */
+
+.quick-summary + .collapsible-shell,
+.main-summary + .collapsible-shell,
+.main-wash-summary + .collapsible-shell,
+.wash-summary-card + .collapsible-shell,
+.response-summary + .collapsible-shell,
+.hero-summary + .collapsible-shell {
+  margin-top: 0.75rem;
+}
+
+/* Separación entre secciones colapsables */
+
+.collapsible-shell + .collapsible-shell,
+.collapsible-shell + .section-panel,
+.section-panel + .collapsible-shell {
+  margin-top: 0.85rem;
+}
+
+/* En mobile un poco más de aire visual */
+
+@media (max-width: 640px) {
+  .app-shell main,
+  .app-main,
+  .main-content,
+  .home-content,
+  .content-stack {
+    gap: 0.95rem;
+  }
+
+  .quick-summary + .collapsible-shell,
+  .main-summary + .collapsible-shell,
+  .main-wash-summary + .collapsible-shell,
+  .wash-summary-card + .collapsible-shell,
+  .response-summary + .collapsible-shell,
+  .hero-summary + .collapsible-shell {
+    margin-top: 0.7rem;
+  }
+}
+
+/* =========================================================
+   Flechas colapsables más prolijas
+   ========================================================= */
+
+.collapsible-shell {
+  position: relative;
+}
+
+.section-collapse-button {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 5;
+
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  min-width: 2.45rem;
+  min-height: 2.45rem;
+  place-items: center;
+
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 92%, transparent);
+  color: var(--text);
+
+  box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.16);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Dar espacio al contenido para que la flecha no lo tape */
+
+.collapsible-shell .panel-heading,
+.collapsible-shell .collapsed-section,
+.collapsible-shell .collapsed-current,
+.collapsible-shell .collapsed-weather-summary,
+.collapsible-shell .collapsed-category-detail,
+.collapsible-shell .hero-current-row {
+  padding-right: 3.25rem;
+}
+
+/* Flecha visual */
+
+.section-chevron {
+  display: block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 180ms ease;
+}
+
+/* Si el componente agrega clase de abierto, queda flecha hacia arriba */
+
+.section-chevron.is-open,
+.section-collapse-button[aria-expanded="true"] .section-chevron {
+  transform: rotate(225deg) translateY(-1px);
+}
+
+.section-collapse-button:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+}
+
+.section-collapse-button:active {
+  transform: scale(0.96);
+}
+
+.section-collapse-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 420px) {
+  .section-collapse-button {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    min-width: 2.3rem;
+    min-height: 2.3rem;
+  }
+
+  .collapsible-shell .panel-heading,
+  .collapsible-shell .collapsed-section,
+  .collapsible-shell .collapsed-current,
+  .collapsible-shell .collapsed-weather-summary,
+  .collapsible-shell .collapsed-category-detail,
+  .collapsible-shell .hero-current-row {
+    padding-right: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-chevron {
+    transition: none;
+  }
+}
