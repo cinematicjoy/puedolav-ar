@@ -13,3 +13,5 @@ build
 app/build
 *.idsig
 .gradle/
+dev-dist
+*.tsbuildinfo
