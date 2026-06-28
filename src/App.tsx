@@ -28,6 +28,7 @@ import { LegalLinks } from "./components/LegalLinks";
 import { PrivacyPage } from "./components/PrivacyPage";
 import { SupportPage } from "./components/SupportPage";
 import { useHashRoute } from "./hooks/useHashRoute";
+import { WashPushToggle } from "./components/WashPushToggle";
 
 function App() {
   const { mode, resolvedMode, setMode } = useThemeMode();
@@ -169,6 +170,8 @@ function App() {
               variables={variables}
               bestWindow={bestWindow}
             />
+
+            <WashPushToggle data={weather.data} />
             
             <CompactModeToggle
               compact={isCompactMode}

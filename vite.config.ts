@@ -61,6 +61,7 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true,
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,woff2,json}"],
+        importScripts: ["push-handler.js"],
         navigateFallback: "index.html",
         navigateFallbackDenylist: [
           /^\/puedolav-ar\/\.well-known\//,
